@@ -1,0 +1,22 @@
+{
+  "name": "blackjack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "node emcompile/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codicate/blackjack.git"
+  },
+  "author": "Henry Liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codicate/blackjack/issues"
+  },
+  "homepage": "https://github.com/codicate/blackjack",
+  "dependencies": {}
+}

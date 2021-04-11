@@ -1,4 +1,6 @@
 //Clion
 .idea/
 cmake-build-debug/
-CMakeLists.txt
+
+//JS
+node_modules

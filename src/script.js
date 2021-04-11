@@ -1,4 +1,4 @@
-import Module from './test.js';
+import Module from './main.js';
 
 (async () => {
   const em = await Module();

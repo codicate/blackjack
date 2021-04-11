@@ -1,8 +1,9 @@
 import Module from './test.js';
 
-Module().then((em) => {
-  const square = em.cwrap('square', 'number', ['number']);
+(async () => {
+  const em = await Module();
 
-  const res = square(5);
-  console.log(res);
-});
+  const numberSpan = document.querySelector('#number');
+  const square = em.cwrap('square', 'number', ['number']);
+  numberSpan.textContent = square(5);
+})();

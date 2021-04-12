@@ -15,9 +15,10 @@ struct Player
   static constexpr int DECK_SIZE = 52;
   inline static bool deck[DECK_SIZE] = {false};
 
-  vector<int> hand;
+  int sum = 0, num_of_As = 0;
+  int card_index = 0, rank_value = 0;
 
-  int player_index, card_index{}, rank_value{};
+  int player_index;
   explicit Player(int index) : player_index(index){};
 
   // Draw a random card
@@ -35,13 +36,14 @@ struct Player
         const int rank_index = i % 13 + 1;
 
         if (rank_index == 1)
-          rank_value = convert_As(rank_index);
+          ++num_of_As;
         else if (rank_index > 9)
           rank_value = 10;
         else
           rank_value = rank_index;
 
-        hand.push_back(rank_value);
+        sum += rank_value;
+        convert_As();
 
         EM_ASM({appendCard($0, $1)}, player_index, card_index);
 
@@ -50,31 +52,24 @@ struct Player
     }
   }
 
-  int sum_hand()
+  void convert_As()
   {
-    int sum = 0;
-
-    for (const int &card : hand)
+    if (num_of_As > 1)
     {
-      sum += card;
+      if (sum + 11 <= 21)
+        sum += 11;
+      else
+        sum += 1;
+
+      for (int i = num_of_As - 1; i > 0; i--)
+      {
+        sum += 1;
+      }
     }
-
-    return sum;
-  }
-
-  int convert_As(int rank_index)
-  {
-    const int sum = sum_hand();
-
-    if (sum + 11 > 21)
-      return 1;
-    else
-      return 11;
   }
 
   int check_sum()
   {
-    const int sum = sum_hand();
     const string name = player_index == 1 ? "computer" : "player";
 
     cout << name << " sum: " << sum << endl;

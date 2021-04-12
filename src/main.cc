@@ -32,51 +32,51 @@ struct Player
       {
         card_index = i;
         deck[i] = true;
+        EM_ASM({appendCard($0, $1)}, player_index, card_index);
 
         const int rank_index = i % 13 + 1;
 
         if (rank_index == 1)
           ++num_of_As;
         else if (rank_index > 9)
-          rank_value = 10;
+          sum += 10;
         else
-          rank_value = rank_index;
-
-        sum += rank_value;
-        convert_As();
-
-        EM_ASM({appendCard($0, $1)}, player_index, card_index);
+          sum += rank_index;
 
         return check_sum();
       }
     }
   }
 
-  void convert_As()
+  int convert_As()
   {
-    if (num_of_As > 1)
+    int sum_after_As = sum;
+
+    if (num_of_As >= 1)
     {
       if (sum + 11 <= 21)
-        sum += 11;
+        sum_after_As += 11;
       else
-        sum += 1;
+        sum_after_As += 1;
 
       for (int i = num_of_As - 1; i > 0; i--)
       {
-        sum += 1;
+        sum_after_As += 1;
       }
     }
+
+    return sum_after_As;
   }
 
   int check_sum()
   {
+    const int sum_after_As = convert_As();
     const string name = player_index == 1 ? "computer" : "player";
+    cout << name << " sum: " << sum_after_As << endl;
 
-    cout << name << " sum: " << sum << endl;
-
-    if (sum > 21)
+    if (sum_after_As > 21)
       return 1;
-    else if (sum == 21)
+    else if (sum_after_As == 21)
       return 2;
     else
       return 0;

@@ -12,9 +12,10 @@ body {
   background-color: #ede6e3;
   color: #26243d;
   text-align: center;
+  font-size: 1.125rem;
 }
 
-body > section::after {
+body > section:not(:last-of-type)::after {
   margin: 2em auto;
   content: '';
   display: block;
@@ -24,7 +25,8 @@ body > section::after {
 }
 
 .cardDisplay > img {
-  height: 10em;
+  width: clamp(5em, 11vw, 9em);
+  margin: .5em;
   -ms-interpolation-mode: nearest-neighbor;
       image-rendering: -webkit-optimize-contrast;
       image-rendering: -moz-crisp-edges;

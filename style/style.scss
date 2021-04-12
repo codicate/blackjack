@@ -16,8 +16,9 @@ body {
   color: hsl(245, 26%, 19%);
 
   text-align: center;
+  font-size: 1.125rem;
 
-  &>section::after {
+  &>section:not(:last-of-type)::after {
     margin: 2em auto;
     content: '';
     display: block;
@@ -31,7 +32,8 @@ body {
 
 .cardDisplay {
   &>img {
-    height: 10em;
+    width: clamp(5em, 11vw, 9em);
+    margin: .5em;
 
     image-rendering: pixelated;
   }

@@ -34,11 +34,10 @@
     const hitBtn = document.querySelector('#hit')
     const standBtn = document.querySelector('#stand')
 
-    const appendCard = (playerIndex, cardIndex) => {
-      const rank_index = cardIndex % 13;
+    const appendCard = (playerIndex, rankIndex) => {
       playerIndex == 1 ?
-        computerHand.textContent += RANKS[rank_index] + ' ' :
-        playerHand.textContent += RANKS[rank_index] + ' ';
+        computerHand.textContent += RANKS[rankIndex] + ' ' :
+        playerHand.textContent += RANKS[rankIndex] + ' ';
     }
 
     const announceVictor = (condition) => {

@@ -1686,13 +1686,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  15032: function() {announceVictor(3)},  
- 15052: function() {announceVictor(4)},  
- 15072: function() {announceVictor(1)},  
- 15092: function() {announceVictor(2)},  
- 15112: function() {setTimeout(function(){location.reload()}, 8000)},  
- 15162: function() {return getInputFromJS()},  
- 15188: function($0, $1) {appendCard($0, $1)}
+  15000: function() {announceVictor(3)},  
+ 15020: function() {announceVictor(4)},  
+ 15040: function() {announceVictor(1)},  
+ 15060: function() {announceVictor(2)},  
+ 15080: function() {setTimeout(function(){location.reload()}, 8000)},  
+ 15130: function() {return getInputFromJS()},  
+ 15156: function($0, $1) {appendCard($0, $1)}
 };
 
 

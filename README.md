@@ -1,6 +1,6 @@
 # blackjack
 
-Classic Blackjack made with WASM, emscripten, and C++
+Blackjack made with WASM, emscripten, and C++
 
 
 ### Features:

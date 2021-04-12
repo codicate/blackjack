@@ -17,7 +17,7 @@ body {
 
   text-align: center;
 
-  p::after {
+  &>section::after {
     margin: 2em auto;
     content: '';
     display: block;
@@ -26,6 +26,14 @@ body {
     width: 20em;
 
     background-color: hsl(9, 8%, 83%);
+  }
+}
+
+.cardDisplay {
+  &>img {
+    height: 10em;
+
+    image-rendering: pixelated;
   }
 }
 

@@ -33,7 +33,7 @@ struct Player
         const int rank_index = i % 13 + 1;
 
         // Use emscripten to execute the append card function, which will add the new card to the respective card list on screen.
-        EM_ASM({appendCard($0, $1)}, player_index, rank_index - 1);
+        EM_ASM({appendCard($0, $1)}, player_index, card_index);
 
         // If the new card is a A, save to the A's bank, and the true sum will be calculated later
         if (rank_index == 1)

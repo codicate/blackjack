@@ -14,13 +14,22 @@ body {
   text-align: center;
 }
 
-body p::after {
+body > section::after {
   margin: 2em auto;
   content: '';
   display: block;
   height: 2px;
   width: 20em;
   background-color: #d7d1d0;
+}
+
+.cardDisplay > img {
+  height: 10em;
+  -ms-interpolation-mode: nearest-neighbor;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -o-pixelated;
+      image-rendering: pixelated;
 }
 
 button {

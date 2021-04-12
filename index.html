@@ -13,35 +13,42 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <p>Result:
-    <span id="result"></span>
-  </p>
-  <p>
-    Computer's hand:
-    <span id="computer"></span>
-  </p>
-  <p>
-    Player's hand:
-    <span id="player"></span>
-  </p>
-  <div id="btn-div">
+  <section>
+    <p>Result:
+      <span id="result"></span>
+    </p>
+  </section>
+  <section>
+    <p>Computer's hand:</p>
+    <div id="computer" class="cardDisplay"></div>
+  </section>
+  <section>
+    <p>Player's hand:</p>
+    <div id="player" class="cardDisplay"></div>
+  </section>
+  <section id="btnDiv">
     <button id="hit">Hit</button>
     <button id="stand">Stand</button>
-  </div>
+  </section>
 
   <script>
-    const RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-
     const resultSpan = document.querySelector('#result')
-    const computerHand = document.querySelector('#computer')
-    const playerHand = document.querySelector('#player')
+    const computerCardDisplay = document.querySelector('#computer')
+    const playerCardDisplay = document.querySelector('#player')
     const hitBtn = document.querySelector('#hit')
     const standBtn = document.querySelector('#stand')
 
-    const appendCard = (playerIndex, rankIndex) => {
-      playerIndex == 1 ?
-        computerHand.textContent += RANKS[rankIndex] + ' ' :
-        playerHand.textContent += RANKS[rankIndex] + ' ';
+    const computerHand = [];
+    const playerHand = [];
+
+    const appendCard = (playerIndex, cardIndex) => {
+      const cardDisplay = playerIndex == 1 ? computerCardDisplay : playerCardDisplay
+      const hand = playerIndex == 1 ? computerHand : playerHand
+      hand.push(cardIndex);
+
+      cardDisplay.innerHTML = hand.map((cardIndex) =>
+        `<img src='assets/card_${Math.floor(cardIndex / 13 + 1)}_${cardIndex % 13 + 1}.png'>`
+      ).join(' ')
     }
 
     const announceVictor = (condition) => {

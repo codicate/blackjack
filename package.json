@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "node emcompile/index.js"
-  },
+  "homepage": "https://github.com/codicate/blackjack",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codicate/blackjack.git"
@@ -17,6 +15,6 @@
   "bugs": {
     "url": "https://github.com/codicate/blackjack/issues"
   },
-  "homepage": "https://github.com/codicate/blackjack",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {}
 }

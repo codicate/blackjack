@@ -22,7 +22,7 @@ struct Player
   explicit Player(int index) : player_index(index){};
 
   // Draw a random card
-  int draw()
+  int hit()
   {
     while (true)
     {
@@ -96,16 +96,18 @@ int main()
   cout << "main" << endl;
   srand(time(nullptr));
 
-  computer.draw();
-  player.draw();
+  computer.hit();
+  player.hit();
 
   play_round(1);
   emscripten_set_main_loop(get_input, LOOP_SPEED, INF_LOOP);
 }
 
-void play_round(int num)
+void play_round(int player_choice)
 {
-  const bool we_have_a_winner = check_absolute_victor(computer.draw(), player.draw());
+  const int computer_condition = computer.convert_As() < 16 ? computer.hit() : 0;
+  const int player_condition = player_choice == 1 ? player.hit() : 0;
+  const bool we_have_a_winner = check_absolute_victor(computer_condition, player_condition);
 
   if (!we_have_a_winner)
   {
@@ -121,7 +123,10 @@ void play_round(int num)
 bool check_absolute_victor(int computer_condition, int player_condition)
 {
   if (computer_condition == 0 && player_condition == 0)
-    return false;
+  {
+    const int winner_index = computer.convert_As() > player.convert_As() ? 1 : 2;
+    EM_ASM({announceVictor($0)}, winner_index);
+  }
   else if (computer_condition == 1 && player_condition == 1)
     EM_ASM({announceVictor(3)});
   else if (computer_condition == 2 && player_condition == 2)

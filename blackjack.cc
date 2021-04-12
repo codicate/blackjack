@@ -4,9 +4,6 @@
 #include <ctime>
 using namespace std;
 
-// #include <emscripten/bind.h>
-// using namespace emscripten;
-
 inline static const string RANKS[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 inline static const string SUITS[4] = {"spades", "hearts", "clubs", "diamonds"};
 
@@ -18,7 +15,7 @@ struct Player
   vector<int> hand;
 
   int player_index, card_index{}, rank_index{}, suit_index{};
-  explicit Player(int index) : player_index(index){};
+  explicit Player(int index) : player_index(index) {};
 
   // Draw a random card
   int draw()

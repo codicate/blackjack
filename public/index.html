@@ -7,12 +7,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="./style.css">
-  <script type="module" src="../src/script.js" defer></script>
-  <title>Test</title>
+  <title>TEST</title>
 </head>
 
 <body>
-  <p id="text">Number: <span id="number"></span></p>
+  <p>Result:
+    <span id="result"></span>
+  </p>
+  <p>
+    Computer's hand:
+    <span id="computer"></span>
+  </p>
+  <p>
+    Computer's hand:
+    <span id="player"></span>
+  </p>
+  <button id="hit">Hit</button>
+  <button id="stand">Stand</button>
+
+  <script>
+    const hitBtn = document.querySelector('#hit')
+    const standBtn = document.querySelector('#stand')
+    const resultSpan = document.querySelector('#result')
+
+    const appendCard = (cardIndex) => {
+      console.log('got card index!!!', cardIndex)
+    }
+
+    let input = 0;
+
+    hitBtn.onclick = () => {
+      input = 1;
+    }
+
+    standBtn.onclick = () => {
+      input = 2;
+    }
+  </script>
+  
+  <script async src="../src/main.js"></script>
 </body>
 
 </html>

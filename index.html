@@ -19,29 +19,48 @@
     <span id="computer"></span>
   </p>
   <p>
-    Computer's hand:
+    Player's hand:
     <span id="player"></span>
   </p>
   <button id="hit">Hit</button>
   <button id="stand">Stand</button>
 
   <script>
+    const RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+
+    const resultSpan = document.querySelector('#result')
+    const computerHand = document.querySelector('#computer')
+    const playerHand = document.querySelector('#player')
     const hitBtn = document.querySelector('#hit')
     const standBtn = document.querySelector('#stand')
-    const resultSpan = document.querySelector('#result')
 
-    const appendCard = (cardIndex) => {
-      console.log('got card index!!!', cardIndex)
+    const appendCard = (playerIndex, cardIndex) => {
+      const rank_index = cardIndex % 13;
+      playerIndex == 1 ?
+        computerHand.textContent += RANKS[rank_index] + ' ' :
+        playerHand.textContent += RANKS[rank_index] + ' ';
     }
 
-    let input = 0;
+    const announceVictor = (condition) => {
+      if (condition == 3) resultSpan.textContent = 'You both lost';
+      else if (condition == 4) resultSpan.textContent = 'It\'s a tie!';
+      else resultSpan.textContent = (condition == 1 ? 'computer' : 'player') + ' won!!!!';
+    }
+
+    let playerDecision = 0;
 
     hitBtn.onclick = () => {
-      input = 1;
+      playerDecision = 1;
     }
 
     standBtn.onclick = () => {
-      input = 2;
+      playerDecision = 2;
+    }
+
+    const getInputFromJS = () => {
+      input = playerDecision;
+      playerDecision = 0;
+      return input;
     }
   </script>
 

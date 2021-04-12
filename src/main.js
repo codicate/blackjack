@@ -1683,9 +1683,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  15224: function() {return input;},  
- 15242: function() {setTimeout(() => location.reload(), 3000);},  
- 15289: function($0) {appendCard($0)}
+  15256: function() {announceVictor(3)},  
+ 15276: function() {announceVictor(4)},  
+ 15296: function() {announceVictor(1)},  
+ 15316: function() {announceVictor(2)},  
+ 15336: function() {setTimeout(function(){location.reload()}, 8000)},  
+ 15386: function() {return getInputFromJS()},  
+ 15412: function($0, $1) {appendCard($0, $1)}
 };
 
 

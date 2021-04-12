@@ -1,20 +1,20 @@
 {
   "name": "blackjack",
   "version": "1.0.0",
+  "author": "Henry Liu",
   "description": "",
+  "license": "ISC",
   "main": "index.js",
   "type": "module",
-  "homepage": "https://github.com/codicate/blackjack",
-  "scripts": {},
+  "homepage": "https://codicate.github.io/blackjack/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codicate/blackjack.git"
   },
-  "author": "Henry Liu",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/codicate/blackjack/issues"
   },
+  "scripts": {},
   "dependencies": {},
   "devDependencies": {}
 }

@@ -21,7 +21,6 @@ struct Player
   int player_index;
   explicit Player(int index) : player_index(index){};
 
-  // Draw a random card
   int hit()
   {
     while (true)
@@ -32,10 +31,12 @@ struct Player
       {
         card_index = i;
         deck[i] = true;
-        EM_ASM({appendCard($0, $1)}, player_index, card_index);
-
         const int rank_index = i % 13 + 1;
 
+        // Use emscripten to execute the append card function, which will add the new card to the respective card list on screen.
+        EM_ASM({appendCard($0, $1)}, player_index, rank_index - 1);
+
+        // If the new card is a A, save to the A's bank, and the true sum will be calculated later
         if (rank_index == 1)
           ++num_of_As;
         else if (rank_index > 9)
@@ -46,6 +47,18 @@ struct Player
         return check_sum();
       }
     }
+  }
+
+  int check_sum()
+  {
+    const int sum_after_As = convert_As();
+
+    if (sum_after_As > 21)
+      return 1;
+    else if (sum_after_As == 21)
+      return 2;
+    else
+      return 0;
   }
 
   int convert_As()
@@ -67,20 +80,6 @@ struct Player
 
     return sum_after_As;
   }
-
-  int check_sum()
-  {
-    const int sum_after_As = convert_As();
-    const string name = player_index == 1 ? "computer" : "player";
-    cout << name << " sum: " << sum_after_As << endl;
-
-    if (sum_after_As > 21)
-      return 1;
-    else if (sum_after_As == 21)
-      return 2;
-    else
-      return 0;
-  }
 };
 
 const int LOOP_SPEED = 60;
@@ -93,7 +92,7 @@ Player player(2);
 
 int main()
 {
-  cout << "main" << endl;
+  cout << "Game Started" << endl;
   srand(time(nullptr));
 
   computer.hit();
@@ -109,14 +108,10 @@ void play_round(int player_choice)
   const int player_condition = player_choice == 1 ? player.hit() : 0;
   const bool we_have_a_winner = check_absolute_victor(computer_condition, player_condition);
 
-  if (!we_have_a_winner)
-  {
-    cout << "continue playing" << endl;
-  }
-  else
+  if (we_have_a_winner)
   {
     emscripten_cancel_main_loop();
-    cout << "game over" << endl;
+    cout << "Game Over" << endl;
   }
 }
 

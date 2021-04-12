@@ -9,7 +9,7 @@ const emscriptenHelper = (args) => {
   execSync(cmd, { encoding: 'utf-8' });
 };
 
-((argv) => {
+(() => {
   try {
     const args = process.argv.slice(2);
     emscriptenHelper(args);

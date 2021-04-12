@@ -19,7 +19,7 @@ struct Player
   int card_index = 0, rank_value = 0;
 
   int player_index;
-  explicit Player(int index) : player_index(index){};
+  explicit Player(int index) : player_index(index) {};
 
   int hit()
   {
@@ -53,10 +53,13 @@ struct Player
   {
     const int sum_after_As = convert_As();
 
+    // Exceeding 21, lost
     if (sum_after_As > 21)
       return 1;
+      // Equal 21, blackjack
     else if (sum_after_As == 21)
       return 2;
+      // Neither, continue the game
     else
       return 0;
   }
@@ -67,15 +70,12 @@ struct Player
 
     if (num_of_As >= 1)
     {
-      if (sum + 11 <= 21)
-        sum_after_As += 11;
-      else
-        sum_after_As += 1;
+      // Add 11 or 1 to the sum depending on if the sum will go over 21 or not
+      sum_after_As += sum + 11 <= 21 ? 11 : 1;
 
+      // For every other A's, if they are 11, it will go over 21, so they must be 1's
       for (int i = num_of_As - 1; i > 0; i--)
-      {
         sum_after_As += 1;
-      }
     }
 
     return sum_after_As;
@@ -85,8 +85,6 @@ struct Player
 const int LOOP_SPEED = 60;
 const bool INF_LOOP = true;
 
-int num;
-
 Player computer(1);
 Player player(2);
 
@@ -95,10 +93,14 @@ int main()
   cout << "Game Started" << endl;
   srand(time(nullptr));
 
+  // First card, both player always hit, and there's no need for win checking
   computer.hit();
   player.hit();
 
+  // Second card, both player always hit
   play_round(1);
+
+  // Start the main loop, which will check for player input every 1/60 of a second
   emscripten_set_main_loop(get_input, LOOP_SPEED, INF_LOOP);
 }
 
@@ -110,6 +112,7 @@ void play_round(int player_choice)
 
   if (we_have_a_winner)
   {
+    // Stop checking the input to make sure the player cannot interact with the game any further
     emscripten_cancel_main_loop();
     cout << "Game Over" << endl;
   }
@@ -117,28 +120,35 @@ void play_round(int player_choice)
 
 bool check_absolute_victor(int computer_condition, int player_condition)
 {
+  // If both player choose to stand, continue the game
   if (computer_condition == 0 && player_condition == 0)
     return false;
+
+    // If both player exceeded 21, declare mutual defeat
   else if (computer_condition == 1 && player_condition == 1)
     EM_ASM({announceVictor(3)});
+
+    // If both player got blackjack, declare mutual victory
   else if (computer_condition == 2 && player_condition == 2)
     EM_ASM({announceVictor(4)});
+
+    // Otherwise, the winner is whoever got a blackjack, or whoever did not exceed 21
   else if (computer_condition == 2 || player_condition == 1)
     EM_ASM({announceVictor(1)});
   else
     EM_ASM({announceVictor(2)});
 
-  EM_ASM({setTimeout(function(){location.reload()}, 8000)});
+  // Set a 3 seconds timeout before refreshing the page, thus starting a new game
+  // During the 3 seconds, player cannot make any other interaction to the game
+  EM_ASM({setTimeout(function(){ location.reload() }, 3000)});
   return true;
 }
 
 void get_input()
 {
-  num = EM_ASM_INT({return getInputFromJS()});
+  // Call the JS function to get which button is clicked by the player
+  int player_choice = EM_ASM_INT({return getInputFromJS()});
 
-  if (num != 0)
-  {
-    play_round(num);
-    num = 0;
-  }
+  // If player_choice is not 0, pass that choice to the next round. Otherwise, repeat the check
+  if (player_choice != 0) play_round(player_choice);
 }

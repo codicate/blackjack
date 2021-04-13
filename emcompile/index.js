@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-const emscriptenHelper = (args) => {
+const emcompile = (args) => {
   const compileOptions = (args[2] && args !== '.') ? `-${args[2]}` : '';
 
   const exportModule = (args[3] === true) ? '-s EXPORT_ES6=1 -s MODULARIZE=1' : '';
@@ -16,7 +16,7 @@ const emscriptenHelper = (args) => {
 (() => {
   try {
     const args = process.argv.slice(2);
-    emscriptenHelper(args);
+    emcompile(args);
   } catch (err) {
     console.log(err);
   }

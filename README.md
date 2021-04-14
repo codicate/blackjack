@@ -20,6 +20,6 @@ Blackjack made with WASM, emscripten, and C++
 
 - Game logic is uhh, exploitative, I need to switch to computer wait until player stop hitting
 
-- Need styling and some image for the cards
+- ~~Need styling and some image for the cards~~
 
-- A way to use external JS ???
+- ~~A way to use external JS ???~~

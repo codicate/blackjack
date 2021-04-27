@@ -10,7 +10,7 @@ const playerHand = [];
 const gameOver = false;
 
 const getCorrespondingCardImg = (cardIndex) =>
-  `../assets/card_${Math.floor(cardIndex / 13 + 1)}_${cardIndex % 13 + 1}.png`;
+  `./assets/card_${Math.floor(cardIndex / 13 + 1)}_${cardIndex % 13 + 1}.png`;
 
 const appendCard = (playerIndex, cardIndex) => {
   const cardDisplay = playerIndex == 1 ? computerCardDisplay : playerCardDisplay;
@@ -22,7 +22,7 @@ const appendCard = (playerIndex, cardIndex) => {
   ).join(' ');
 
   computerCardDisplay.children[0].setAttribute('src',
-    '../assets/card_back.png'
+    './assets/card_back.png'
   );
 };
 

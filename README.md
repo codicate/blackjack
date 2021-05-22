@@ -16,10 +16,4 @@ Blackjack made with WASM, emscripten, and C++
 - Bonus: include a node file for compiling that save me a few key stroke
 
 
-### Todo:
-
-- Game logic is uhh, exploitative, I need to switch to computer wait until player stop hitting
-
-- ~~Need styling and some image for the cards~~
-
-- ~~A way to use external JS ???~~
+[Got the pixel art from here](https://drawsgood.itch.io/8bit-deck-card-assets)

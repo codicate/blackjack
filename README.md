@@ -2,7 +2,7 @@
 
 Blackjack made with WASM, emscripten, and C++
 
-[Live](codicate.github.io/blackjack/)
+[Live](https://codicate.github.io/blackjack/)
 
 ### Features:
 
